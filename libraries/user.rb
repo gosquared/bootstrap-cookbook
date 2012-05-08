@@ -1,24 +1,23 @@
 module Bootstrap
   class User
 
-    attr_reader :resource, :node, :name
+    attr_reader :resource, :name
 
-    def initialize(resource, node)
-      @resource, @node = resource, node
-
-      @name = resource.username
+    def initialize(resource)
+      @resource = resource
+      @name = @resource.username
     end
 
     def home
-      @home ||= (@name == "root") ? "/#{@name}" : "#{resource.home_basepath}/#{@name}"
+      @home ||= (@name == "root") ? "/#{@name}" : "#{@resource.home_basepath}/#{@name}"
     end
 
     def shell
-      resource.shell
+      @resource.shell
     end
 
     def password
-      @password ||= resource.password.empty? ? '' : %x{openssl passwd -1 '#{resource.password}'}.chomp
+      @password ||= @resource.password.empty? ? '' : %x{openssl passwd -1 '#{@resource.password}'}.chomp
     end
 
     def profile
@@ -26,11 +25,11 @@ module Bootstrap
     end
 
     def home_owner
-      resource.groups.include?("sftp") ? "root" : @name
+      @resource.groups.include?("sftp") ? "root" : @name
     end
 
     def home_group
-      resource.groups.include?("sftp") ? "root" : (resource.home_group || @name)
+      @resource.groups.include?("sftp") ? "root" : (@resource.home_group || @name)
     end
 
     def exists?

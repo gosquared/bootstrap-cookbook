@@ -7,6 +7,7 @@ node[:system_users].each do |username, properties|
     home_permission   properties[:home_permission]
     home_group        properties[:home_group]
     shell             properties[:shell]
+    profile           properties[:profile]
     ssh_keys          properties[:keys]
     action            properties[:status]
   end
