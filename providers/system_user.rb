@@ -27,3 +27,6 @@ def load_current_resource
   extend Bootstrap::RVM
   extend Bootstrap::Bash
 end
+
+# https://github.com/bryanwb/chef-ark/blob/master/libraries/provider_ark.rb
+# https://github.com/fnichol/chef-user/blob/master/providers/account.rb

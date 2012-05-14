@@ -73,3 +73,5 @@ end
 def exists?
   `id #{username} 2>&1`.index('uid')
 end
+
+# https://github.com/bryanwb/chef-ark/blob/master/libraries/resource_ark.rb
